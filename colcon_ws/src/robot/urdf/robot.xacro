@@ -6,6 +6,7 @@
   <xacro:include filename="$(find robot)/urdf/parts/left_thigh/left_thigh.xacro"/>
   <xacro:include filename="$(find robot)/urdf/parts/right_thigh/right_thigh.xacro"/>
   <xacro:include filename="$(find robot)/urdf/parts/shin/shin.xacro"/>
+    <xacro:include filename="$(find robot)/urdf/robot_control_gazebo.xacro"/>
 
   <xacro:property name="PI" value="3.14159274"/>
 
@@ -78,7 +79,9 @@
 
   <!-- =============== Gazebo =============== -->
   <!-- Controllers -->
-
+ 
+  
+  <!-- Base -->
   
   <!-- Base -->
   <xacro:base_gazebo_v0/>
