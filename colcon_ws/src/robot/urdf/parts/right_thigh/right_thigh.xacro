@@ -16,12 +16,12 @@
 	<link name="${prefix}_right_thigh_link">
 	  <visual>
 		<geometry>
-		  <mesh filename="package://robot/meshes/DAE/right_thigh/right_thigh.dae"/>
+		  <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/right_thigh.dae"/>
 		</geometry>
 	  </visual>
 	  <collision>
 		<geometry>
-		  <mesh filename="package://robot/meshes/STL/right_thigh/right_thigh.stl"/>
+		  <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/right_thigh.stl"/>
 		</geometry>
 	  </collision>
 	  <inertial>

@@ -28,6 +28,8 @@ setup(
          [f for f in glob('urdf/*') if os.path.isfile(f)]),
         (os.path.join('share', package_name, 'rviz'), 
          [f for f in glob('rviz/*') if os.path.isfile(f)]),
+        (os.path.join('share', package_name, 'worlds'), 
+         [f for f in glob('worlds/*') if os.path.isfile(f)]),
         # Para partes, solo archivos
 
         (os.path.join('share', package_name, 'urdf/parts'), 

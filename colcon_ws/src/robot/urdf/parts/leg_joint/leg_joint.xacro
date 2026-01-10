@@ -16,12 +16,12 @@
 	<link name="${prefix}_leg_joint_link">
 	  <visual>
 		<geometry>
-		  <mesh filename="package://meshes/DAE/leg_joint/leg_joint.dae"/>
+		  <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/leg_joint.dae"/>
 		</geometry>
 	  </visual>
 	  <collision>
 		<geometry>
-		  <mesh filename="package://meshes/STL/leg_joint/leg_joint.stl"/>
+		  <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/leg_joint.stl"/>
 		</geometry>
 	  </collision>
 	  <inertial>

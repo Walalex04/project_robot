@@ -82,6 +82,7 @@
  
   
   <!-- Base -->
+  <xacro:robot_ros2_control/>
   
   <!-- Base -->
   <xacro:base_gazebo_v0/>

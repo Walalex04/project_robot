@@ -1,0 +1,81 @@
+Panels:
+    - Class: rviz_common/Displays
+        Name: Displays
+    - Class: rviz_common/Views
+        Name: Views
+    - Class: rviz_common/Selection
+        Name: Selection
+    - Class: rviz_common/Tool Properties
+        Name: Tool Properties
+    - Class: rviz_common/Views
+        Name: Views
+    - Class: rviz_common/Time
+        Name: Time
+
+Visualization Manager:
+    Displays:
+        - Class: rviz_default_plugins/RobotModel
+        Name: RobotModel
+        Enabled: true
+        Description Topic: /robot_description
+        Description Source: Topic
+        Visual Enabled: true
+        Collision Enabled: false
+        Update Interval: 0
+      
+    - Class: rviz_default_plugins/TF
+        Name: TF
+        Enabled: true
+        Show Names: true
+        Show Arrows: true
+        Show Axes: true
+        Marker Scale: 0.5
+        Update Interval: 0
+      
+    - Class: rviz_default_plugins/Axes
+        Name: Axes
+        Enabled: true
+        Reference Frame: base_link
+        Length: 0.5
+        Radius: 0.05
+      
+    - Class: rviz_default_plugins/Grid
+        Name: Grid
+        Enabled: true
+        Plane Cell Count: 10
+        Normal Cell Count: 0
+        Cell Size: 1
+        Line Style: Lines
+        Plane: XY
+        Color: 160; 160; 164
+        Alpha: 0.5
+      
+Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: base_link
+    Frame Rate: 30
+    
+Views:
+    Current:
+        Class: rviz_default_plugins/Orbit
+        Name: Orbit View
+        Target Frame: base_link
+        Enable Stereo Rendering: false
+        Focal Point:
+            X: 0
+            Y: 0
+            Z: 0
+        Focal Shape Size: 0.05
+        Invert Z Axis: false
+        Distance: 3.0
+        Pitch: 30.0
+        Yaw: 0.0
+      
+Toolbars:
+    toolbars: {}
+    
+Window Geometry:
+    height: 768
+    width: 1024
+    x: 10
+    y: 10

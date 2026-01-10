@@ -16,12 +16,12 @@
 	<link name="${prefix}_shin_link">
 	  <visual>
 		<geometry>
-		  <mesh filename="package://robot/meshes/DAE/shin/shin.dae"/>
+		  <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/shin.dae"/>
 		</geometry>
 	  </visual>
 	  <collision>
 		<geometry>
-		  <mesh filename="package://robot/meshes/STL/shin/shin.stl"/>
+		  <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/shin.stl"/>
 		</geometry>
 	  </collision>
 	  <inertial>

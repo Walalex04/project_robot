@@ -25,7 +25,19 @@ def generate_launch_description():
         launch_arguments={
             'gui': LaunchConfiguration('gui'),
             'pause': 'true',
+            'world': PathJoinSubstitution([
+                FindPackageShare(LaunchConfiguration('urdf_package')),
+                'worlds',
+                'house.world'  
+            ])
         }.items(),
+    )
+
+      
+    controllers_arg = DeclareLaunchArgument(
+        'controllers_file',
+        default_value='config/robot_controller.yaml',
+        description='Path to controllers configuration'
     )
 
     description_launch_py = IncludeLaunchDescription(
@@ -43,6 +55,8 @@ def generate_launch_description():
         arguments=['-topic', '/robot_description', '-entity', 'robot', '-z', '0.5', '-unpause'],
         output='screen',
     )
+
+
 
     return LaunchDescription([  
         gui_arg,

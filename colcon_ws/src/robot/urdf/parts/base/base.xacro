@@ -13,12 +13,14 @@
 	<link name="base_link">
 	  <visual>
 		  <geometry>
-		    <mesh filename="package://robot/meshes/DAE/base/base_link.dae"/>
+		    <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/base_link.dae"
+        scale="1 1 1"/>  
 		  </geometry>
 	  </visual>
 	  <collision>
 		  <geometry>
-		    <mesh filename="package://robot/meshes/STL/base/base_link.stl"/>
+		    <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/base_link.stl"
+        scale="1 1 1"/>
 		  </geometry>
 	  </collision>
 	  <inertial>

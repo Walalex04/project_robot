@@ -1,41 +1,65 @@
+#!/usr/bin/env python3
 
+import os
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
-from launch_ros.substitutions import FindPackageShare
-#from ament_index_python_packages import get_package_share_directory
+from launch_ros.actions import Node
+from launch.substitutions import Command
 
 def generate_launch_description():
-    ld = LaunchDescription()
-
-    urdf_path = FindPackageShare(package='robot')
-    #urdf_path = get_package_share_directory('robot')
-
-    default_model_path = PathJoinSubstitution(['urdf', 'first.urdf'])
-    default_rviz_config_path = PathJoinSubstitution([urdf_path, 'rviz', 'urdf.rviz'])
-
-    gui_arg = DeclareLaunchArgument(name='gui', default_value='true', choices=['true', 'false'],
-            description='Flag to enable joint_state_publisher_gui')
+    package_name = 'robot'
     
-    ld.add_action(gui_arg)
-    rviz_arg = DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
-            description='Absolute path to rviz config file')
-
-    ld.add_action(rviz_arg)
-
-    ld.add_action(DeclareLaunchArgument(name='model', default_value=default_model_path,
-            description='Path to robot urdf file relative to urdf'))
-
+    # Obtener rutas - CORREGIDO para evitar problemas con Snap
+    pkg_path = get_package_share_directory(package_name)
+    xacro_file = os.path.join(pkg_path, 'urdf', 'robot.xacro')
+    rviz_config = os.path.join(pkg_path, 'rviz', 'robot_display.rviz')
     
-    ld.add_action(IncludeLaunchDescription(
-            PathJoinSubstitution([FindPackageShare('urdf_launch'), 'launch', 'display.launch.py']),
-            launch_arguments={
-                    'urdf_package': 'robot',
-                    'urdf_package_path': LaunchConfiguration('model'),
-                    'rviz_config': LaunchConfiguration('rvizconfig'),
-                    'jsp_gui': LaunchConfiguration('gui')
-
-                }.items()
-        ))
-
-    return ld
+    # Configuración de entorno para evitar problemas
+    os.environ['QT_QPA_PLATFORM'] = 'xcb'
+    
+    # Verificar que el archivo XACRO existe
+    if not os.path.exists(xacro_file):
+        raise FileNotFoundError(f"XACRO no encontrado: {xacro_file}")
+    
+    print(f"Usando XACRO: {xacro_file}")
+    print(f"Usando configuración RViz: {rviz_config}")
+    
+    return LaunchDescription([
+        # Robot State Publisher - Publica el robot_description
+        Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='robot_state_publisher',
+            output='screen',
+            parameters=[{
+                'robot_description': Command(['xacro ', xacro_file]),
+                'use_sim_time': False,
+                'publish_frequency': 30.0
+            }],
+            emulate_tty=True  # Para ver colores en la terminal
+        ),
+        
+        # Joint State Publisher (sin GUI para evitar problemas)
+        Node(
+            package='joint_state_publisher',
+            executable='joint_state_publisher',
+            name='joint_state_publisher',
+            output='screen',
+            parameters=[{
+                'source_list': ['joint_states'],
+                'rate': 30
+            }],
+            emulate_tty=True
+        ),
+        
+        # RViz2 - Visualizador
+        Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            output='screen',
+            arguments=['-d', rviz_config],
+            emulate_tty=True,
+            parameters=[{'use_sim_time': False}]
+        )
+    ])
