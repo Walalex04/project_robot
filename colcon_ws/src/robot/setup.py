@@ -24,6 +24,8 @@ setup(
         # Archivos específicos, no carpetas
         (os.path.join('share', package_name, 'launch'), 
          [f for f in glob('launch/*') if os.path.isfile(f)]),
+         (os.path.join('share', package_name, 'config'), 
+         [f for f in glob('config/*') if os.path.isfile(f)]),
         (os.path.join('share', package_name, 'urdf'), 
          [f for f in glob('urdf/*') if os.path.isfile(f)]),
         (os.path.join('share', package_name, 'rviz'), 
@@ -63,6 +65,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'ramped_joypad = robot.ramped_joypad:main',
+            'robot_controller_gazebo = robot.robot_controller_gazebo:main',
         ],
     },
 )

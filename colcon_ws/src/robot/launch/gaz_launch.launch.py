@@ -47,6 +47,8 @@ def generate_launch_description():
             'urdf_package_path': LaunchConfiguration('urdf_package_path')}.items()
     )
 
+
+
     # push robot_description to factory and spawn robot in gazebo
     urdf_spawner_node = Node(
         package='gazebo_ros',
@@ -57,6 +59,34 @@ def generate_launch_description():
     )
 
 
+    #add controller manager
+    controller_manager = Node(
+        package="controller_manager",
+        executable="ros2_control_node",
+        parameters=[
+            PathJoinSubstitution([
+                FindPackageShare('robot'),
+                'config',
+                'robot_controller.yaml'
+            ])
+        ],
+        output='screen'
+    )
+
+
+    joint_state_broadcaster = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['joint_state_broadcaster', '--controller-manager', '/controller_manager'],
+        output='screen'
+    )
+
+    forward_position_controller = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['forward_position_controller', '--controller-manager', '/controller_manager'],
+        output='screen'
+    )
 
     return LaunchDescription([  
         gui_arg,
@@ -64,5 +94,8 @@ def generate_launch_description():
         model_arg,
         empty_world_launch,
         description_launch_py,
+        controller_manager,
         urdf_spawner_node,
+        joint_state_broadcaster,
+        forward_position_controller
     ])
