@@ -27,6 +27,6 @@ forward_position_controller:
     interface_name: position
     command_interfaces:
       - position
-    state_interfaces:
+    state_interfaces: 
       - position
       - velocity

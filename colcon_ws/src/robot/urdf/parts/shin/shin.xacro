@@ -8,8 +8,8 @@
 	  <xacro:insert_block name="joint_origin"/>
 	  <parent link="${parent}"/>
 	  <child link="${prefix}_shin_link"/>
-          <limit effort="500" velocity="10" lower="-3.14159" upper = "3.14159"/>
-          <dynamics damping="0.005" friction="0.1"/>
+		<limit effort="500" velocity="10" lower="-3" upper = "3"/>
+       <dynamics damping="0.005" friction="0.1"/>
 	  <xacro:insert_block name="joint_axis"/>
 	</joint>
 
@@ -20,6 +20,7 @@
 		</geometry>
 	  </visual>
 	  <collision>
+	  	<origin xyz="0 0 0" rpy="1.570796 0 0"/>
 		<geometry>
 		  <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/shin.stl"/>
 		</geometry>

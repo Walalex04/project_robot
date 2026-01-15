@@ -3,8 +3,9 @@
   <xacro:macro name="left_thigh_gazebo_v0" params="prefix">
     <gazebo reference="${prefix}_left_thigh_link">
       <selfCollide>false</selfCollide>
-      <mu1 value="0.2" />
-      <mu2 value="0.2" />
+      <mu1 value="1.0" />
+      <mu2 value="1.0" />
+      
     </gazebo>
   </xacro:macro>
 </robot>

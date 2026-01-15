@@ -16,7 +16,7 @@ package_name = 'robot'
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='1.0.0',
     packages=find_packages(exclude=['test']),
         data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
@@ -52,7 +52,10 @@ setup(
          
         # ... repetir para otras carpetas ...
     ],
-    install_requires=['setuptools'],
+    install_requires=[
+        'setuptools',
+        'numpy'
+    ],
     zip_safe=True,
     maintainer='alex',
     maintainer_email='alex@todo.todo',
@@ -65,8 +68,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'ramped_joypad = robot.ramped_joypad:main',
-            'robot_controller_gazebo = robot.robot_controller_gazebo:main',
+            'robot_contoller = robot.robot_controller_gaz:main'
         ],
     },
 )
