@@ -5,6 +5,8 @@
       <selfCollide>false</selfCollide>
       <mu1 value="0.05" />
       <mu2 value="0.05" />
+            <kp  value="1000000.0"/>
+      <kd  value="100.0"/>  
       <sensor name="imu_sensor" type="imu">
         <always_on>1</always_on>
         <update_rate>100</update_rate>

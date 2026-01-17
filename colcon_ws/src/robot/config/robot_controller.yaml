@@ -1,15 +1,14 @@
 controller_manager:
   ros__parameters:
     use_sim_time: true
-    update_rate: 1000  # Hz
+    update_rate: 500  # Hz
 
-    forward_position_controller:
-      type: forward_command_controller/ForwardCommandController
-
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-forward_position_controller:
+joint_trajectory_controller:
   ros__parameters:
     joints:
       - front_right_leg_joint
@@ -24,9 +23,50 @@ forward_position_controller:
       - rear_left_leg_joint
       - rear_left_thigh_joint
       - rear_left_shin_joint
-    interface_name: position
+
     command_interfaces:
       - position
     state_interfaces: 
       - position
       - velocity
+
+    state_publish_rate: 50.0
+    action_monitor_rate: 20.0
+    stop_trajectory_duration: 0.5
+    allow_partial_joints_goal: false
+    open_loop_control: false
+      
+      # ============================================
+      # INTERPOLACIÓN (MÁGICA)
+      # ============================================
+    interpolation_method: "splines"  # ¡SUAVE! (linear, cubic, splines)
+    allow_integration_in_goal_trajectories: false
+      
+      # ============================================
+      # LÍMITES DE VELOCIDAD/ACELERACIÓN
+      # ============================================
+    constraints:
+      goal_time: 0.15           # Tiempo máximo para alcanzar meta
+      stopped_velocity_tolerance: 0.01
+      trajectory_time: 2.0     # Duración por defecto de trayectoria
+      min_velocity: -10.0       # Límites de velocidad (rad/s)
+      max_velocity: 10.0
+      min_acceleration: -5.0   # Límites de aceleración (rad/s²)
+      max_acceleration: 5.0
+      
+      # ============================================
+      # GANANCIAS PID (CONTROLADOR INTERNO)
+      # ============================================
+    gains:
+      front_right_leg_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}
+      front_right_thigh_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}
+      front_right_shin_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}
+      front_left_leg_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}
+      front_left_thigh_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}
+      front_left_shin_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}
+      rear_right_leg_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}
+      rear_right_thigh_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}
+      rear_right_shin_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}
+      rear_left_leg_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}
+      rear_left_thigh_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}
+      rear_left_shin_joint: {p: 20.0, i: 0.0, d: 1.0, i_clamp: 1.0}

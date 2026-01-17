@@ -8,8 +8,8 @@
 	  <xacro:insert_block name="joint_origin"/>
 	  <parent link="${parent}"/>
 	  <child link="${prefix}_right_thigh_link"/>
-			<limit effort="500" velocity="10" lower="-3" upper = "3"/>
-        <dynamics damping="0.005" friction="0.1"/>
+			<limit effort="0.001" velocity="10" lower="-3" upper = "3"/>
+        <dynamics damping="0.001" friction="0.7"/>
 	  <xacro:insert_block name="joint_axis"/>
 	</joint>
 
@@ -20,8 +20,15 @@
 		</geometry>
 	  </visual>
 	  <collision>
+	  <!--<origin
+			xyz="0.213 -0.03 0"
+			rpy="0 1.57075 0" />-->
+
 		<geometry>
 		  <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/right_thigh.stl"/>
+		  
+			<!--<mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/left_thigh.stl"/>-->
+			<!--<cylinder length="0.426" radius="0.035"/>-->
 		</geometry>
 	  </collision>
 	  <inertial>
@@ -29,6 +36,7 @@
 		<mass value="1.24"/>
 		<inertia ixx="0.002" ixy="0.0" ixz="0.0" iyy="0.002" iyz="0.0" izz="0.001" />
 		<!--inertia ixx="-0.44" ixy="0.012" ixz="0.14" iyy="-0.423" iyz="0.0217" izz="0.0135" -->
+		
 	  </inertial>
 	</link>
   </xacro:macro>

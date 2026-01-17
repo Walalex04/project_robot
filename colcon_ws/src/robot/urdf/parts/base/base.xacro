@@ -18,9 +18,13 @@
 		  </geometry>
 	  </visual>
 	  <collision>
+      <!--<origin
+        xyz="0 0 0.07"
+        rpy="0 0 0" /> -->
 		  <geometry>
-		    <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/base_link.stl"
-        scale="1 1 1"/>
+		    <mesh filename="/home/alex/Documentos/universidad/robot/colcon_ws/src/robot/meshes/base_link.stl" 
+        scale="1 1 1"/> 
+        <!--<box size="0.759 0.22 0.14"/>-->
 		  </geometry>
 	  </collision>
 	  <inertial>
@@ -31,8 +35,8 @@
           <surface>
             <friction>
               <ode>
-                <mu>0.8</mu>
-                <mu2>0.8</mu2>
+                <mu>0.9</mu>
+                <mu2>0.9</mu2>
                 <kp>1e15</kp>
                 <kd>1e13</kd>
               </ode>

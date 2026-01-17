@@ -36,7 +36,7 @@ def generate_launch_description():
       
     controllers_arg = DeclareLaunchArgument(
         'controllers_file',
-        default_value='config/robot_controller.yaml',
+        default_value='config/robot_controller_forward.yaml',
         description='Path to controllers configuration'
     )
 
@@ -67,7 +67,7 @@ def generate_launch_description():
             PathJoinSubstitution([
                 FindPackageShare('robot'),
                 'config',
-                'robot_controller.yaml'
+                'robot_controller_forward.yaml'
             ])
         ],
         output='screen'

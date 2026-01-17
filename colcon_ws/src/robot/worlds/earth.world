@@ -1,16 +1,101 @@
-<?xml version="1.0" ?>
-<sdf version="1.6">
-  <world name="simple_world">
-    <physics name="default_physics" default="true" type="ode">
-      <max_step_size>0.001</max_step_size>
-      <real_time_factor>1.0</real_time_factor>
-      <real_time_update_rate>1000</real_time_update_rate>
-    </physics>
-    <include>
-      <uri>model://ground_plane</uri>
-    </include>
-    <include>
-      <uri>model://sun</uri>
-    </include>
-  </world>
+<?xml version="1.0"?>
+<sdf version="1.9">
+<world name="balanced_physics">
+
+  <!-- GRAVEDAD 50% normal -->
+  <gravity>0 0 -9.81</gravity>  <!-- Mitad de gravedad (-9.8 normal) -->
+
+  <!-- FÍSICA EQUILIBRADA -->
+  <physics name="balanced" type="ode">
+    <max_step_size>0.001</max_step_size>
+    <real_time_factor>1.0</real_time_factor>
+    <real_time_update_rate>1000</real_time_update_rate>
+    
+    <ode>
+      <solver>
+        <type>quick</type>
+        <iters>150</iters>      <!-- Balanceado -->
+        <sor>1.2</sor>          <!-- Normal -->
+      </solver>
+      
+      <!-- PARÁMETROS MODERADOS -->
+      <constraints>
+        <cfm>0.00001</cfm>      <!-- Más suave que 0.0000001 -->
+        <erp>0.4</erp>          <!-- Más responsivo -->
+        <contact_max_correcting_vel>0.5</contact_max_correcting_vel>  <!-- Normal -->
+        <contact_surface_layer>0.001</contact_surface_layer>
+      </constraints>
+    </ode>
+  </physics>
+
+  <!-- SUELO NORMAL -->
+  <model name="ground_plane">
+    <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+          </plane>
+        </geometry>
+        <surface>
+          <!-- FRICCIÓN NORMAL -->
+          <friction>
+            <ode>
+              <mu>1.0</mu>      <!-- Fricción normal (no 100) -->
+              <mu2>1.0</mu2>
+              <slip1>0.01</slip1>
+              <slip2>0.01</slip2>
+            </ode>
+          </friction>
+          
+          <!-- POCO REBOTE -->
+          <bounce>
+            <restitution_coefficient>0.1</restitution_coefficient>  <!-- Un poco de rebote -->
+            <threshold>1.0</threshold>
+          </bounce>
+          
+          <!-- CONTACTOS NORMLES -->
+          <contact>
+            <ode>
+              <soft_cfm>0.00001</soft_cfm>
+              <soft_erp>0.4</soft_erp>
+              <kp>100000000</kp>    <!-- Rígido pero no extremo -->
+              <kd>10000</kd>
+              <max_vel>1.0</max_vel>  <!-- Normal -->
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+  </model>
+
+  <!-- LUZ -->
+  <include>
+    <uri>model://sun</uri>
+  </include>
+  
+  <!-- CÉSPED OPCIONAL (más realista) -->
+  <model name="grass_plane">
+    <pose>0 0 -0.01 0 0 0</pose>
+    <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>100 100</size>
+          </plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Grass</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+
+</world>
 </sdf>
