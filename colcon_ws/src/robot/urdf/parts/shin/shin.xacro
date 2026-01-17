@@ -31,6 +31,6 @@
 		<inertia ixx="0.0003" ixy="0.0013" ixz="0.000045" iyy="0.029" iyz="-0.000003" izz="0.029" />
 	  </inertial>
 	</link>
-  </xacro:macro>
+  </xacro:macro>	
   
 </robot>

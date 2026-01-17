@@ -2,7 +2,7 @@
 
 import numpy as np 
 from math import sqrt, cos, sin, acos, pi, atan2
-from Transformations import homog_transform_inverse, homog_transform 
+from .Transformations import homog_transform_inverse, homog_transform 
 
 
 class InverseKinematics(object):
@@ -30,9 +30,9 @@ class InverseKinematics(object):
         """
             get the position respect to leg's reference system (q0)
         """
-
+ 
         leg_pos = (np.block([[leg_pos], [np.array([1,1,1,1])]])).T
-
+        
         #trasnformation matrix from base world to robot's system reference
         T_refw2crob = homog_transform(dx, dy, dz, roll, pitch, yaw)
         

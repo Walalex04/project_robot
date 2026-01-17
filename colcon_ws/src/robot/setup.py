@@ -50,13 +50,18 @@ setup(
          
          
          
-        # ... repetir para otras carpetas ...
+        #scripts python
+        ('lib/' + package_name, ['robot/robot_controller_gaz.py']),
+        ('lib/' + package_name + '/tools', ['robot/tools/Transformations.py', 'robot/tools/InverseKinematics.py']),
+        ('lib/' + package_name + '/RobotController', 
+         ['robot/RobotController/Robot.py', 'robot/RobotController/RobotState.py', 'robot/RobotController/StndController.py']),
     ],
     install_requires=[
         'setuptools',
-        'numpy'
+        'numpy',
+
     ],
-    zip_safe=True,
+    zip_safe= True,
     maintainer='alex',
     maintainer_email='alex@todo.todo',
     description='TODO: Package description',

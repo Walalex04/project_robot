@@ -28,7 +28,7 @@ def generate_launch_description():
             'world': PathJoinSubstitution([
                 FindPackageShare(LaunchConfiguration('urdf_package')),
                 'worlds',
-                'house.world'  
+                'earth.world'  
             ])
         }.items(),
     )
